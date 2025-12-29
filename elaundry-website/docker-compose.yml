@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  elaundry-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    restart: unless-stopped
+    networks:
+      - elaundry-network
+
+  # Development service (uncomment for development)
+  # elaundry-dev:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - .:/app
+  #     - /app/node_modules
+  #   environment:
+  #     - NODE_ENV=development
+  #   command: npm run dev
+
+networks:
+  elaundry-network:
+    driver: bridge
+
+volumes:
+  elaundry-data:
+
+
+
+# ye maine likhA HAI
+
+Connecting to: mongodb://127.0.0.1:27017/
+Using MongoDB: 7.0.x

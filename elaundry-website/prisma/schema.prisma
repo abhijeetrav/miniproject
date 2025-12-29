@@ -1,0 +1,55 @@
+
+
+
+
+
+
+// DB provider
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Prisma Client
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Pricing {
+  id             Int      @id @default(autoincrement())
+  category       String
+  item_name      String
+  price_in_rupees Int
+  price_in_paise Int     @default(0)
+  created_at     DateTime @default(now())
+}
+
+model Booking {
+  id             Int      @id @default(autoincrement())
+  name           String
+  phone          String
+  email          String?
+  address        String?
+  service_type   String?
+  pricing_plan   String?
+  pickup_date    String?
+  pickup_time    String?
+  instructions   String?
+  status         String   @default("pending") // pending | paid | cancelled
+  amount_in_paise Int
+  created_at     DateTime @default(now())
+}
+
+
+
+
+
+
+
